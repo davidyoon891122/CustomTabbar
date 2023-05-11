@@ -48,11 +48,15 @@ final class CustomTabbar: UIView {
             .enumerated()
             .forEach { i, item in
                 let isButtonSelected = selectedIndex == i
-                let image = isButtonSelected ? item.selectedImage : item.normalImage
+                let image = isButtonSelected ? item.iconImage.default : item.iconImage.selected
+                
                 let selectedButton = tabButtons[i]
                 
                 selectedButton.setImage(image, for: .normal)
                 selectedButton.setImage(image, for: .highlighted)
+                if image == nil {
+                    selectedButton.setTitle("MENU", for: .normal)
+                }
             }
     }
     
@@ -61,8 +65,15 @@ final class CustomTabbar: UIView {
             .enumerated()
             .forEach { i, item in
                 let button = UIButton()
-                button.setImage(item.normalImage, for: .normal)
-                button.setImage(item.normalImage, for: .highlighted)
+                if item.iconImage.default == nil {
+                    button.setTitle(item.title, for: .normal)
+                    button.setTitle(item.title, for: .highlighted)
+                    button.setTitleColor(.label, for: .normal)
+                    button.setTitleColor(.label.withAlphaComponent(0.5), for: .highlighted)
+                }
+                button.setImage(item.iconImage.default, for: .normal)
+                button.setImage(item.iconImage.selected, for: .highlighted)
+                button.tintColor = .label
                 button.isSelected = i == 0
                 button.rx.tap
                     .map { _ in
@@ -83,6 +94,7 @@ final class CustomTabbar: UIView {
         
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+            $0.height.equalTo(50.0)
         }
     }
     
