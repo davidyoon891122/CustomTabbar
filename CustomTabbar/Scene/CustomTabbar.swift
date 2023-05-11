@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CustomTabbar: UIView {
     private lazy var stackView: UIStackView = {
@@ -17,17 +19,23 @@ final class CustomTabbar: UIView {
         return stackView
     }()
     
-    private let tabItems: [TabItem]
+    let items: [TabItem] = TabItem.allCases
     private var tabButtons = [UIButton]()
-    private var selectedIndex = 0 {
+    fileprivate var selectedIndex = 0 {
         didSet {
-            updateUI()
+            tabButtons
+                .enumerated()
+                .forEach { i, btn in
+                    btn.isSelected = i == selectedIndex
+                }
         }
     }
     
-    init(tabItems: [TabItem]) {
-        self.tabItems = tabItems
-        super.init(frame: .zero)
+    private let disposeBag = DisposeBag()
+    fileprivate var tapSubject = PublishSubject<Int>()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setup()
     }
     
@@ -36,7 +44,7 @@ final class CustomTabbar: UIView {
     }
     
     private func updateUI() {
-        tabItems
+        items
             .enumerated()
             .forEach { i, item in
                 let isButtonSelected = selectedIndex == i
@@ -49,31 +57,45 @@ final class CustomTabbar: UIView {
     }
     
     private func setup() {
-        defer { updateUI() }
-        
-        tabItems
+        items
             .enumerated()
             .forEach { i, item in
                 let button = UIButton()
                 button.setImage(item.normalImage, for: .normal)
                 button.setImage(item.normalImage, for: .highlighted)
-                button.addAction(UIAction(handler: { [weak self] _ in
-                    self?.selectedIndex = i
-                }), for: .touchUpInside)
+                button.isSelected = i == 0
+                button.rx.tap
+                    .map { _ in
+                        i
+                    }.bind(to: tapSubject)
+                    .disposed(by: disposeBag)
                 tabButtons.append(button)
-                stackView.addArrangedSubview(button)
             }
-        backgroundColor = .systemGray.withAlphaComponent(0.2)
+        
+        tapSubject
+            .bind(to: rx.selectedIndex)
+            .disposed(by: disposeBag)
+        
+        backgroundColor = .lightGray
         
         addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        tabButtons.forEach(stackView.addArrangedSubview(_:))
         
-        NSLayoutConstraint.activate([
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-        ])
+        stackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
+}
+
+extension Reactive where Base: CustomTabbar {
+    var tabButton: Observable<Int> {
+        base.tapSubject
+    }
+    
+    var changeIndex: Binder<Int> {
+        Binder(base) { base, index in
+            base.selectedIndex = index
+        }
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum TabItem: Int {
+enum TabItem: Int, CaseIterable {
     case home
     case chat
     case my

@@ -6,23 +6,22 @@
 //
 
 import UIKit
+import RxSwift
+import SnapKit
 
 final class RootViewController: UIViewController {
-    private let tabbarView = CustomTabbar(tabItems: [.home, .chat, .my])
+    private lazy var tabbarController: CustomTabbarController = {
+        let tabbarController = CustomTabbarController()
+        tabbarController.modalPresentationStyle = .fullScreen
+        return tabbarController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemIndigo
-        view.addSubview(tabbarView)
-        
-        tabbarView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            tabbarView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tabbarView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            tabbarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tabbarView.heightAnchor.constraint(equalToConstant: 56.0),
-            tabbarView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor)
-        ])
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        present(tabbarController, animated: true)
     }
 }

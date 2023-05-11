@@ -14,6 +14,10 @@
 		499D0A0E2A0C61CA009972D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D0A0D2A0C61CA009972D3 /* RootViewController.swift */; };
 		499D0A112A0C62C8009972D3 /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D0A102A0C62C8009972D3 /* CustomTabbar.swift */; };
 		499D0A132A0C6443009972D3 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D0A122A0C6443009972D3 /* TabItem.swift */; };
+		499D0A162A0C6C9F009972D3 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 499D0A152A0C6C9F009972D3 /* RxCocoa */; };
+		499D0A182A0C6C9F009972D3 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 499D0A172A0C6C9F009972D3 /* RxSwift */; };
+		499D0A1B2A0C6CAF009972D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 499D0A1A2A0C6CAF009972D3 /* SnapKit */; };
+		499D0A1D2A0C7329009972D3 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D0A1C2A0C7329009972D3 /* CustomTabbarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,7 @@
 		499D0A0D2A0C61CA009972D3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		499D0A102A0C62C8009972D3 /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
 		499D0A122A0C6443009972D3 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		499D0A1C2A0C7329009972D3 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499D0A1B2A0C6CAF009972D3 /* SnapKit in Frameworks */,
+				499D0A182A0C6C9F009972D3 /* RxSwift in Frameworks */,
+				499D0A162A0C6C9F009972D3 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +98,7 @@
 				499D0A0D2A0C61CA009972D3 /* RootViewController.swift */,
 				499D0A102A0C62C8009972D3 /* CustomTabbar.swift */,
 				499D0A122A0C6443009972D3 /* TabItem.swift */,
+				499D0A1C2A0C7329009972D3 /* CustomTabbarController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -110,6 +119,11 @@
 			dependencies = (
 			);
 			name = CustomTabbar;
+			packageProductDependencies = (
+				499D0A152A0C6C9F009972D3 /* RxCocoa */,
+				499D0A172A0C6C9F009972D3 /* RxSwift */,
+				499D0A1A2A0C6CAF009972D3 /* SnapKit */,
+			);
 			productName = CustomTabbar;
 			productReference = 49283A162A0C5FDA000354BE /* CustomTabbar.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +152,10 @@
 				Base,
 			);
 			mainGroup = 49283A0D2A0C5FDA000354BE;
+			packageReferences = (
+				499D0A142A0C6C9F009972D3 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				499D0A192A0C6CAF009972D3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 49283A172A0C5FDA000354BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -168,6 +186,7 @@
 				49283A1A2A0C5FDA000354BE /* AppDelegate.swift in Sources */,
 				49283A1C2A0C5FDA000354BE /* SceneDelegate.swift in Sources */,
 				499D0A132A0C6443009972D3 /* TabItem.swift in Sources */,
+				499D0A1D2A0C7329009972D3 /* CustomTabbarController.swift in Sources */,
 				499D0A0E2A0C61CA009972D3 /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +397,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		499D0A142A0C6C9F009972D3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		499D0A192A0C6CAF009972D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		499D0A152A0C6C9F009972D3 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 499D0A142A0C6C9F009972D3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		499D0A172A0C6C9F009972D3 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 499D0A142A0C6C9F009972D3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		499D0A1A2A0C6CAF009972D3 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 499D0A192A0C6CAF009972D3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 49283A0E2A0C5FDA000354BE /* Project object */;
 }
