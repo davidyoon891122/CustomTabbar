@@ -22,6 +22,17 @@ final class RootViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        present(tabbarController, animated: true)
+        present(tabbarController, animated: false)
     }
 }
+
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct RootViewControllerPreview: PreviewProvider {
+    static var previews: some View {
+        RootViewController().showPreview()
+    }
+}
+#endif

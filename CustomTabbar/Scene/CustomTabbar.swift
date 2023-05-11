@@ -99,3 +99,19 @@ extension Reactive where Base: CustomTabbar {
         }
     }
 }
+
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct CustomTabbarPreview: PreviewProvider {
+    static var previews: some View {
+        UIView.UIViewPreview {
+            CustomTabbar()
+        }
+        .frame(width: UIScreen.main.bounds.width, height: 80.0)
+        .previewLayout(.sizeThatFits)
+    }
+}
+
+#endif

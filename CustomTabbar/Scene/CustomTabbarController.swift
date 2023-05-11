@@ -17,7 +17,6 @@ final class CustomTabbarController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
     }
 }
 
@@ -33,7 +32,7 @@ private extension CustomTabbarController {
         
         tabbar.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-25)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
     }
     
@@ -93,7 +92,7 @@ private extension CustomTabbarController {
 }
 
 extension Reactive where Base: CustomTabbarController {
-    var changeIndex: Binder<Int> {
+    var changeTabbarIndex: Binder<Int> {
         Binder(base) { base, index in
             base.tabbar.rx.changeIndex.onNext(index)
         }
